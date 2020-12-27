@@ -45,19 +45,11 @@ async fn main() -> Result<()> {
     let pool = SqlitePool::connect("highlights.db").await?;
     sqlx::migrate!("./migrations").run(&pool).await?;
 
-    let mut handles = Vec::new();
     let mut entries = read_dir(opt.directory).await?;
     while let Some(res) = entries.next().await {
         let entry = res?;
         let poold = pool.clone();
-        let res = task::spawn(async move {
-            process_file(&poold, &entry.path()).await;
-        });
-        handles.push(res);
-    }
-
-    for handle in handles {
-        handle.await;
+        process_file(&poold, &entry.path()).await?;
     }
 
     Ok(())

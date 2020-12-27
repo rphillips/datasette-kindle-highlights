@@ -7,5 +7,5 @@ clean:
 generate:
   sqlx db create
   sqlx migrate run
-  cargo run -- --directory=data
+  cargo run --release -- --directory=data
   

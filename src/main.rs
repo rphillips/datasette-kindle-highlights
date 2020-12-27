@@ -1,11 +1,12 @@
 use sqlx::sqlite::SqlitePool;
-use sqlx::Done;
 
 use anyhow::Result;
 use serde::{Deserialize};
 use structopt::StructOpt;
 
-use async_std::fs::File;
+use async_std::fs::{File, read_dir};
+use async_std::path::PathBuf;
+use async_std::task;
 use async_std::prelude::*;
 
 #[derive(Debug, StructOpt)]
@@ -38,23 +39,44 @@ struct BookHighlights {
 }
 
 #[async_std::main]
-async fn main() -> Result<()>{
+async fn main() -> Result<()> {
     let opt = Opt::from_args();
 
-    let mut file = File::open("data/Kindle.Highlights_Sapiens.A.Brief.History.of.Humankind_1609083628903.json").await?;
+    let pool = SqlitePool::connect("highlights.db").await?;
+    sqlx::migrate!("./migrations").run(&pool).await?;
+
+    let mut handles = Vec::new();
+    let mut entries = read_dir(opt.directory).await?;
+    while let Some(res) = entries.next().await {
+        let entry = res?;
+        let poold = pool.clone();
+        let res = task::spawn(async move {
+            process_file(&poold, &entry.path()).await;
+        });
+        handles.push(res);
+    }
+
+    for handle in handles {
+        handle.await;
+    }
+
+    Ok(())
+}
+
+async fn process_file(pool: &SqlitePool, filepath: &PathBuf) -> Result<i64> {
+    println!("{}", filepath.display());
+
+    let mut file = File::open(filepath).await?;
     let mut buffer = Vec::new();
     file.read_to_end(&mut buffer).await?;
 
     let mut de = serde_json::Deserializer::from_slice(&buffer);
     let o = BookHighlights::deserialize(&mut de).unwrap();
 
-    let pool = SqlitePool::connect("highlights.db").await?;
-    add_book(&pool, &o).await?;
-
-    Ok(())
+    add_book(&pool, &o).await
 }
 
-async fn add_book(pool: &SqlitePool, bh: &BookHighlights) -> anyhow::Result<i64> {
+async fn add_book(pool: &SqlitePool, bh: &BookHighlights) -> Result<i64> {
     let mut conn = pool.acquire().await?;
 
     let book_id = sqlx::query!(

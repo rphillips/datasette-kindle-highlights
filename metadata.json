@@ -1,0 +1,11 @@
+{
+    "databases": {
+        "highlights": {
+            "tables": {
+                "_sqlx_migrations": {
+                    "hidden": true
+                }
+            }
+        }
+    }
+}

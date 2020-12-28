@@ -3,7 +3,6 @@ use sqlx::sqlite::SqlitePool;
 use anyhow::Result;
 use serde::{Deserialize};
 use structopt::StructOpt;
-
 use async_std::fs::{File, read_dir};
 use async_std::path::PathBuf;
 use async_std::prelude::*;

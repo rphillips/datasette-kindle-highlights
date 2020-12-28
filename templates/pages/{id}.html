@@ -43,7 +43,8 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Text</th>
+                <th>Highlight</th>
+                <th>Note</th>
               </tr>
             </thead>
             <tbody>
@@ -51,6 +52,11 @@
               <tr>
                 <td>{{ hl.id }}</td>
                 <td>{{ hl.text }}</td>
+                {% if hl.note != None %}
+                <td>{{ hl.note}}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>

@@ -1,5 +1,8 @@
 name: Rust
 on: [push]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
 jobs:
   build-linux:
     runs-on: ubuntu-latest
@@ -9,11 +12,10 @@ jobs:
       - name: Install Latest Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly
           default: true
           override: true
-      - name: Install SQLX Deps
-        run: cargo install sqlx-cli && cargo sqlx prepare --check
+      - uses: Swatinem/rust-cache@v1
       - name: Build
         run: cargo build --all --release && mv target/release/kindle_highlights target/release/kindle_highlights_amd64
       - name: Release
@@ -22,9 +24,6 @@ jobs:
         with:
           files: |
             target/release/kindle_highlights_amd64
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DATABASE_URL: ""
   build-win:
     runs-on: windows-latest
     steps:
@@ -33,11 +32,10 @@ jobs:
       - name: Install Latest Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly
           default: true
           override: true
-      - name: Install SQLX Deps
-        run: cargo install sqlx-cli && cargo sqlx prepare --check
+      - uses: Swatinem/rust-cache@v1
       - name: Build
         run: cargo build --all --release
       - name: Release
@@ -46,9 +44,6 @@ jobs:
         with:
           files: |
             target/release/kindle_highlights.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DATABASE_URL: ""
   build-mac:
     runs-on: macos-latest
     steps:
@@ -57,12 +52,11 @@ jobs:
       - name: Install Latest Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly
           target: x86_64-apple-darwin
           default: true
           override: true
-      - name: Install SQLX Deps
-        run: cargo install sqlx-cli && cargo sqlx prepare --check
+      - uses: Swatinem/rust-cache@v1
       - name: Build
         run: cargo build --all --release && mv target/release/kindle_highlights target/release/kindle_highlights_darwin
       - name: Release
@@ -71,6 +65,3 @@ jobs:
         with:
           files: |
             target/release/kindle_highlights_darwin
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DATABASE_URL: ""

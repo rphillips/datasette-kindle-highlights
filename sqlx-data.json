@@ -1,3 +1,23 @@
 {
-  "db": "SQLite"
+  "db": "SQLite",
+  "7d35fbe99d0f2139726e6bbc5f62384fc5da0656dcc4bcdd2474c2dfbc35e0f8": {
+    "query": "\n    INSERT INTO highlight ( book_id, text, note, location)\n    VALUES ( ?1, ?2, ?3, ?4 )\n            ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 4
+      },
+      "nullable": []
+    }
+  },
+  "a714691aa572f0d4d056b68f72b04f5d9316f2611e3d5f4acdfb9648f7948a29": {
+    "query": "\nINSERT INTO book ( asin, title, authors )\nVALUES ( ?1, ?2, ?3 )\n        ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Right": 3
+      },
+      "nullable": []
+    }
+  }
 }

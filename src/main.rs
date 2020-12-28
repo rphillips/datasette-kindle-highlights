@@ -6,7 +6,6 @@ use structopt::StructOpt;
 
 use async_std::fs::{File, read_dir};
 use async_std::path::PathBuf;
-use async_std::task;
 use async_std::prelude::*;
 
 #[derive(Debug, StructOpt)]
@@ -49,14 +48,17 @@ async fn main() -> Result<()> {
     while let Some(res) = entries.next().await {
         let entry = res?;
         let poold = pool.clone();
-        process_file(&poold, &entry.path()).await?;
+        let path = entry.path();
+        match process_file(&poold, &path).await {
+            Ok(id) => println!("(id={:?} path={:?}) success", id, path.display()),
+            Err(err) => println!("{:?} error: {:?}", err, path.display()),
+        };
     }
 
     Ok(())
 }
 
 async fn process_file(pool: &SqlitePool, filepath: &PathBuf) -> Result<i64> {
-    println!("{}", filepath.display());
 
     let mut file = File::open(filepath).await?;
     let mut buffer = Vec::new();

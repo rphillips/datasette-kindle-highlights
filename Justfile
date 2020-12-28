@@ -1,4 +1,4 @@
-run: generate
+run: clean generate
   datasette highlights.db --metadata metadata.json
 
 clean:

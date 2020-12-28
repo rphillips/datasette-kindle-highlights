@@ -1,3 +1,5 @@
+export DATABASE_URL = "sqlite:highlights.db"
+
 run: generate
   datasette highlights.db --metadata metadata.json --template-dir=templates/ 
 

@@ -463,6 +463,9 @@ name = "either"
 version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "event-listener"
@@ -731,6 +734,16 @@ dependencies = [
  "matches",
  "unicode-bidi",
  "unicode-normalization",
+]
+
+[[package]]
+name = "indexmap"
+version = "1.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4fb1fa934250de4de8aef298d81c729a7d33d8c239daa3a7575e6b92bfc7313b"
+dependencies = [
+ "autocfg",
+ "hashbrown",
 ]
 
 [[package]]
@@ -1322,6 +1335,7 @@ version = "1.0.60"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1500e84d27fe482ed1dc791a56eddc2f230046a040fa908c08bda1d9fb615779"
 dependencies = [
+ "indexmap",
  "itoa",
  "ryu",
  "serde",
@@ -1435,6 +1449,7 @@ dependencies = [
  "once_cell",
  "parking_lot",
  "percent-encoding",
+ "serde",
  "sha2",
  "smallvec",
  "sqlformat",
@@ -1456,9 +1471,12 @@ dependencies = [
  "either",
  "futures",
  "heck",
+ "hex",
  "lazy_static",
  "proc-macro2",
  "quote",
+ "serde",
+ "serde_json",
  "sha2",
  "sqlx-core",
  "sqlx-rt",

@@ -2,7 +2,6 @@ name: Rust
 on: [push]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
 jobs:
   build-linux:
     runs-on: ubuntu-latest
@@ -20,7 +19,7 @@ jobs:
         run: cargo build --all --release && mv target/release/kindle_highlights target/release/kindle_highlights_amd64
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/*')
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             target/release/kindle_highlights_amd64
@@ -40,7 +39,7 @@ jobs:
         run: cargo build --all --release
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/*')
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             target/release/kindle_highlights.exe
@@ -61,7 +60,7 @@ jobs:
         run: cargo build --all --release && mv target/release/kindle_highlights target/release/kindle_highlights_darwin
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/*')
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             target/release/kindle_highlights_darwin

@@ -1,6 +1,6 @@
 [package]
 name = "kindle_highlights"
-version = "0.1.0"
+version = "0.1.1dev"
 authors = ["Ryan Phillips <ryan@trolocsis.com>"]
 edition = "2018"
 

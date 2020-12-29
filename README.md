@@ -6,4 +6,4 @@ datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision
 
 ## License
 
-datasette-kindle-highlights is licensed under the Apache 2.0 license. For more information, please see the LICENSE_2.0 file.
+datasette-kindle-highlights is licensed under the Apache 2.0 license. For more information, please see the LICENSE-2.0 file.

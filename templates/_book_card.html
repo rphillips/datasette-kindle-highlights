@@ -3,11 +3,12 @@
 <tr>
   <th scope="row">{{ book.id }}</th>
   <td>
-    <img
-      src="//images.amazon.com/images/P/{{ book.asin }}.01._PI_SCMZZZZZZZ_.jpg"
-    />
+    <a href="/{{ book.id }}">
+      <img
+        src="//images.amazon.com/images/P/{{ book.asin }}.01._PI_SCMZZZZZZZ_.jpg"
+    /></a>
   </td>
   <td>{{ book.title }}</td>
   <td>{{ book.authors }}</td>
-  <td>{{ count }}</td>
+  <td><a href="/{{ book.id }}">{{ count }}</a></td>
 </tr>

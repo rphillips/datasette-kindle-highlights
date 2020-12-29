@@ -1,18 +1,13 @@
-<div class="col-auto mb-1">
-  <div class="card p-3" style="width: 25rem">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img
-          src="//images.amazon.com/images/P/{{ book.asin }}.01._PI_SCMZZZZZZZ_.jpg"
-        />
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <div class="card-title">{{book.title}}</div>
-          <div class="card-subtitle text-muted">{{book.authors}}</div>
-          <a href="/{{ book.id }}" class="card-link">Highlights</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% set result = sql("SELECT COUNT(*) from highlight WHERE book_id = :book_id", {
+"book_id": book.id}) %} {% set count = result[0][0] %}
+<tr>
+  <th scope="row">{{ book.id }}</th>
+  <td>
+    <img
+      src="//images.amazon.com/images/P/{{ book.asin }}.01._PI_SCMZZZZZZZ_.jpg"
+    />
+  </td>
+  <td>{{ book.title }}</td>
+  <td>{{ book.authors }}</td>
+  <td>{{ count }}</td>
+</tr>

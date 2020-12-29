@@ -2,7 +2,7 @@
 
 # datasette-kindle-highlights - freedom of highlights
 
-datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision](https://readwise.io/bookcision) exports into a SQLite database. This project also leverages Simon Wilson's [datasette](https://github.com/simonw/datasette) project to export the resulting database as a website. 
+datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision](https://readwise.io/bookcision) into a SQLite database. This project also leverages Simon Wilson's [datasette](https://github.com/simonw/datasette) project to export the resulting database as a website. 
 
 ## License
 

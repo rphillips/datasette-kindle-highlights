@@ -1,5 +1,5 @@
 run: generate
-  datasette highlights.db --metadata metadata.json --template-dir=templates/ 
+  datasette highlights.db -h 0.0.0.0 --metadata metadata.json --template-dir=templates/ 
 
 clean:
   rm -f highlights.db

@@ -12,9 +12,9 @@ datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision
 
 This project is just at the very beginning stages. I welcome anyone to help out. I would like to add the following features:
 
-* Wire up an automated, github action, Docker image that contains both datasette and the kindle_highlights application
-* Add more documentation on how to run the application, datasette, and the docker image
-* Add better 'note' support to the datasette website
+- [ ] Wire up an automated, github action, Docker image that contains both datasette and the kindle_highlights application
+- [ ] Add more documentation on how to run the application, datasette, and the docker image
+- [ ] Add better 'note' support to the datasette website
 
 ## License
 

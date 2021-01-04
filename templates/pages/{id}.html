@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   {% set rows = sql("select * from highlight where book_id = :id", {"id": id})
-  %} {% if not rows %} {{ raise_404("Museum not found") }} {% endif %}
+  %} {% if not rows %} {{ raise_404("Book not found") }} {% endif %}
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

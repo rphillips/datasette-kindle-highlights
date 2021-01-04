@@ -2,6 +2,10 @@
     "databases": {
         "highlights": {
             "tables": {
+                "highlight": {
+                     "fts_table": "highlight_fts",
+                     "fts_pk": "id"
+                },
                 "_sqlx_migrations": {
                     "hidden": true
                 }

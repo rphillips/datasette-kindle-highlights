@@ -59,11 +59,21 @@ CREATE TABLE IF NOT EXISTS highlight
 )
 "#;
 
+static DEFAULT_SCHEMA_HIGHLIGHT_FTS: &'static str = r#"
+CREATE VIRTUAL TABLE "highlight_fts" USING FTS4
+(
+    name,
+    text,
+    content="hightlight"
+)
+"#;
+
 fn main() -> Result<()> {
     let opt = Opt::from_args();
     let db = Connection::open_with_flags(opt.database_path,  OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE)?;
     db.execute(DEFAULT_SCHEMA_BOOK, NO_PARAMS)?;
     db.execute(DEFAULT_SCHEMA_HIGHLIGHT, NO_PARAMS)?;
+    db.execute(DEFAULT_SCHEMA_HIGHLIGHT_FTS, NO_PARAMS)?;
     let mut entries = read_dir(opt.directory)?;
     while let Some(res) = entries.next() {
         let entry = res?;
@@ -73,6 +83,7 @@ fn main() -> Result<()> {
             Err(err) => println!("{:?} error: {:?}", err, path.display()),
         };
     }
+    finalize_search(&db)?;
     Ok(())
 }
 
@@ -82,6 +93,7 @@ fn process_file(pool: &Connection, filepath: &PathBuf) -> Result<i64> {
     let mut de = serde_json::Deserializer::from_reader(buf_reader);
     let bh = BookHighlights::deserialize(&mut de)?;
     add_book(&pool, &bh)
+
 }
 
 fn add_book(db: &Connection, bh: &BookHighlights) -> Result<i64> {
@@ -111,5 +123,14 @@ fn add_highlights(book_id: i64, db: &Connection, bh: &BookHighlights) -> Result<
         )?;
     }
     db.execute_batch("COMMIT TRANSACTION;")?;
+    Ok(())
+}
+
+fn finalize_search(db: &Connection) -> Result<()> {
+    db.execute(
+        r#"
+    INSERT INTO "highlight_fts" (rowid, text)
+    SELECT rowid, text FROM highlight
+        "#, NO_PARAMS)?;
     Ok(())
 }

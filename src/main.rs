@@ -1,3 +1,7 @@
+#![deny(clippy::all)]
+#![warn(clippy::pedantic)]
+#![allow(clippy::doc_markdown, clippy::if_not_else, clippy::non_ascii_literal)]
+
 use anyhow::Result;
 use rusqlite::{params, Connection, OpenFlags, NO_PARAMS};
 use std::fs::{File, read_dir};
@@ -37,7 +41,7 @@ struct BookHighlights {
     highlights: Vec<Highlight>,
 }
 
-static DEFAULT_SCHEMA_BOOK: &'static str = r#"
+static DEFAULT_SCHEMA_BOOK: &str = r#"
 CREATE TABLE IF NOT EXISTS book
 (
     id          INTEGER PRIMARY KEY NOT NULL,
@@ -47,7 +51,7 @@ CREATE TABLE IF NOT EXISTS book
 )
 "#;
 
-static DEFAULT_SCHEMA_HIGHLIGHT: &'static str = r#"
+static DEFAULT_SCHEMA_HIGHLIGHT: &str = r#"
 CREATE TABLE IF NOT EXISTS highlight
 (
     id          INTEGER PRIMARY KEY NOT NULL,
@@ -59,7 +63,7 @@ CREATE TABLE IF NOT EXISTS highlight
 )
 "#;
 
-static DEFAULT_SCHEMA_HIGHLIGHT_FTS: &'static str = r#"
+static DEFAULT_SCHEMA_HIGHLIGHT_FTS: &str = r#"
 CREATE VIRTUAL TABLE "highlight_fts" USING FTS4
 (
     name,
@@ -74,8 +78,7 @@ fn main() -> Result<()> {
     db.execute(DEFAULT_SCHEMA_BOOK, NO_PARAMS)?;
     db.execute(DEFAULT_SCHEMA_HIGHLIGHT, NO_PARAMS)?;
     db.execute(DEFAULT_SCHEMA_HIGHLIGHT_FTS, NO_PARAMS)?;
-    let mut entries = read_dir(opt.directory)?;
-    while let Some(res) = entries.next() {
+    for res in read_dir(opt.directory)? {
         let entry = res?;
         let path = entry.path();
         match process_file(&db, &path) {

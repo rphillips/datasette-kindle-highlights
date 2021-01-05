@@ -9,6 +9,9 @@
                 "_sqlx_migrations": {
                     "hidden": true
                 }
+            },
+            "queries": {
+                "search": "select id, book_id, text, note, location from highlight where id in (select rowid from highlight_fts where highlight_fts match escape_fts(:q))"
             }
         }
     }

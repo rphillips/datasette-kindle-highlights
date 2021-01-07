@@ -86,8 +86,7 @@ fn main() -> Result<()> {
             Err(err) => println!("{:?} error: {:?}", err, path.display()),
         };
     }
-    finalize_search(&db)?;
-    Ok(())
+    finalize_search(&db)
 }
 
 fn process_file(pool: &Connection, filepath: &PathBuf) -> Result<i64> {
@@ -96,7 +95,6 @@ fn process_file(pool: &Connection, filepath: &PathBuf) -> Result<i64> {
     let mut de = serde_json::Deserializer::from_reader(buf_reader);
     let bh = BookHighlights::deserialize(&mut de)?;
     add_book(&pool, &bh)
-
 }
 
 fn add_book(db: &Connection, bh: &BookHighlights) -> Result<i64> {

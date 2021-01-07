@@ -8,14 +8,30 @@ datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision
 
 ![](https://raw.githubusercontent.com/rphillips/datasette-kindle-highlights/screenshots/screenshot1.png)
 
+## Docker
+
+Create the database from a directory of json files under `data`:
+
+```
+kindle_highlights --directory=data
+```
+
+Run the docker image:
+
+```
+docker run -p 8001:8001 -v $PWD/highlights.db:/data/highlights.db rphillips/datasette-kindle-highlights
+```
+
+Browse to http://localhost:8001/
+
 ## Status
 
 This project is just at the very beginning stages. I welcome anyone to help out. I would like to add the following features:
 
+- [x] Add search functionality
 - [ ] Wire up an automated, github action, Docker image that contains both datasette and the kindle_highlights application
 - [ ] Add more documentation on how to run the application, datasette, and the docker image
 - [ ] Add better 'note' support to the datasette website
-- [x] Add search functionality
 
 ## License
 

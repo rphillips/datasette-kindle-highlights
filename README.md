@@ -10,7 +10,8 @@ datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision
 
 ## Docker
 
-Create the database from a directory of json files under `data`:
+Create the database from a directory of JSON files, exported from Bookcision,
+under a `data` directory:
 
 ```
 kindle_highlights --directory=data

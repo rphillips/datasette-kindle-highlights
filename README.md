@@ -25,6 +25,17 @@ docker run -p 8001:8001 -v $PWD/highlights.db:/data/highlights.db rphillips/data
 
 Browse to http://localhost:8001/
 
+## Development
+
+[Just](https://github.com/casey/just) is an awesome program to run specific commands.
+
+Running `just` in the project directory displays a bunch of convienient commands.
+
+`just build` will build a release version of kindle_highlights.
+`just run` will build kindle_highlights, generate a database, and run datasette
+
+There are many more!
+
 ## Status
 
 This project is just at the very beginning stages. I welcome anyone to help out. I would like to add the following features:

@@ -8,6 +8,18 @@ datasette-kindle-highlights imports Kindle highlights and notes from [Bookcision
 
 ![](https://raw.githubusercontent.com/rphillips/datasette-kindle-highlights/screenshots/screenshot1.png)
 
+## Install
+
+Download the pre-built binary from the [Github
+Releases](https://github.com/rphillips/datasette-kindle-highlights/releases)
+page.
+
+Or, install with cargo:
+
+```
+cargo install --git https://github.com/rphillips/datasette-kindle-highlights
+```
+
 ## Docker
 
 Create the database from a directory of JSON files, exported from Bookcision,

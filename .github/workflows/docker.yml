@@ -1,4 +1,4 @@
-name: ci
+name: Docker Release
 if: startsWith(github.ref, 'refs/tags/')
 on:
   push:

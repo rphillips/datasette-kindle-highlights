@@ -2,7 +2,8 @@ venv := ".venv"
 python := venv + "/bin/python"
 pip := venv + "/bin/pip"
 datasette := venv + "/bin/datasette"
-container_name := "rphillips/datasette-kindle-highlights"
+version := `cargo metadata --format-version=1 --no-deps | jq -r '.packages[0].version'`
+container_name := "rphillips/datasette-kindle-highlights:" + version
 
 all:
   just --list
@@ -32,7 +33,7 @@ build:
 generate-db: clean
   cargo run --release -- --directory=data
 
-# Generate the database using ./data directory
+# Generate docker image
 generate-docker-image:
   docker build -t {{container_name}} .
 

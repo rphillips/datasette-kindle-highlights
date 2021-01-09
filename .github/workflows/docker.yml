@@ -22,6 +22,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: rphillips/datasette-kindle-highlights:latest,rphillips/datasette-kindle-highlights:${{ github.event.release.tag_name }}
+          tags: rphillips/datasette-kindle-highlights:latest,rphillips/datasette-kindle-highlights:${GITHUB_REF##*/}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

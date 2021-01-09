@@ -1,11 +1,11 @@
 name: Docker Release
-environment: release
 on:
   push:
     tags:
       - "v*.*.*"
 jobs:
   main:
+    environment: release
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU

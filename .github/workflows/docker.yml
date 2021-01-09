@@ -1,4 +1,5 @@
 name: Docker Release
+environment: release
 on:
   push:
     tags:

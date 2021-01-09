@@ -23,5 +23,6 @@ jobs:
         with:
           push: true
           tags: rphillips/datasette-kindle-highlights:latest
+          tags: rphillips/datasette-kindle-highlights:latest,rphillips/datasette-kindle-highlights:${{ github.event.release.tag_name }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

@@ -17,11 +17,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: get tag version
+        id: vars
+        run: echo ::set-output name=tag::$(echo ${GITHUB_REF/refs\/tags\/v/})
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: rphillips/datasette-kindle-highlights:latest,rphillips/datasette-kindle-highlights:${GITHUB_REF/refs\/tags\/v/}
+          tags: rphillips/datasette-kindle-highlights:latest,rphillips/datasette-kindle-highlights:${{steps.vars.outputs.tag}}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

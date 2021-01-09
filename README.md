@@ -17,7 +17,7 @@ page.
 Or, install with cargo:
 
 ```
-cargo install --git https://github.com/rphillips/datasette-kindle-highlights
+cargo install --branch main --git https://github.com/rphillips/datasette-kindle-highlights
 ```
 
 ## Docker

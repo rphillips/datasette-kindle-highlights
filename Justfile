@@ -10,7 +10,7 @@ all:
 
 # Run with datasette
 run: create-venv generate-db
-  {{datasette}} highlights.db -h 0.0.0.0 --metadata metadata.json --template-dir=templates/  --plugins-dir=plugins/
+  {{datasette}} highlights.db --metadata metadata.json --template-dir=templates/  --plugins-dir=plugins/
 
 # Run with docker
 run-with-docker: generate-docker-image generate-db

@@ -17,8 +17,14 @@ run-with-docker: generate-docker-image generate-db
   docker run -ti -p 8001:8001 -v $PWD/highlights.db:/data/highlights.db {{container_name}}
 
 # Clean
-clean: cleanup-venv
+clean: clean-db clean-rust
+
+# Clean database
+clean-db:
   rm -f highlights.db
+
+# Clean database
+clean-rust:
   cargo clean
 
 # Build Debug
@@ -30,7 +36,7 @@ build:
   cargo build --release
 
 # Generate the database using ./data directory
-generate-db: clean
+generate-db: clean-db
   cargo run --release -- --directory=data
 
 # Generate docker image

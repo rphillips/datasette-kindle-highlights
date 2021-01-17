@@ -1,6 +1,6 @@
 [package]
 name = "kindle_highlights"
-version = "0.3.0-dev"
+version = "0.3.1"
 authors = ["Ryan Phillips <ryan@trolocsis.com>"]
 license = "Apache-2.0"
 description = "Convert Bookcision Kindle highlight exports to SQLite."

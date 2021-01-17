@@ -41,12 +41,28 @@ Browse to http://localhost:8001/
 
 [Just](https://github.com/casey/just) is an awesome program to run specific commands.
 
-Running `just` in the project directory displays a bunch of convienient commands.
+Running `just` in the project directory displays a bunch of convienient commands:
+
+```
+just --list
+Available recipes:
+    all
+    build                 # Build Release
+    build-debug           # Build Debug
+    clean                 # Clean
+    clean-db              # Clean database
+    clean-rust            # Clean database
+    cleanup-venv          # Cleanup virtual environenment
+    create-venv           # Create a dev venv if not exist
+    generate-db           # Generate the database using ./data directory
+    generate-docker-image # Generate docker image
+    run                   # Run with datasette
+    run-with-docker       # Run with docker
+    update-venv           # Update virtualenv
+```
 
 `just build` will build a release version of kindle_highlights.
 `just run` will build kindle_highlights, generate a database, and run datasette
-
-There are many more!
 
 ## Status
 

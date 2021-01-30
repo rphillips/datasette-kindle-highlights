@@ -84,6 +84,7 @@ This project is just at the very beginning stages. I welcome anyone to help out.
 
 - [x] Add search functionality
 - [x] Wire up an automated, github action, Docker image that contains both datasette and the kindle_highlights application
+- [x] Dark mode
 - [ ] Add more documentation on how to run the application, datasette, and the docker image
 - [ ] Add better 'note' support to the datasette website
 

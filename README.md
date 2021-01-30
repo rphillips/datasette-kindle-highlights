@@ -64,6 +64,20 @@ Available recipes:
 `just build` will build a release version of kindle_highlights.
 `just run` will build kindle_highlights, generate a database, and run datasette
 
+## Development Kubernetes
+
+### Create a Kubernetes Cluster
+
+```
+ctlptl create cluster kind --registry=ctlptl-registry
+```
+
+### Tilt
+
+```
+tilt up
+```
+
 ## Status
 
 This project is just at the very beginning stages. I welcome anyone to help out. I would like to add the following features:

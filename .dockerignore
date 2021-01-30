@@ -1,1 +1,3 @@
-target/
+/target
+/tilt_modules
+highlights.db

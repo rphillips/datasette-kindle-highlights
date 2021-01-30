@@ -1,3 +1,5 @@
+/data
 /target
+/tilt_modules
 /.venv
 highlights.db

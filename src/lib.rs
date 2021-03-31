@@ -95,7 +95,7 @@ fn add_highlights(book_id: i64, db: &Connection, bh: &BookHighlights) -> Result<
     Ok(())
 }
 
-pub fn init_db(db_path: &String) -> Result<Connection> {
+pub fn init_db(db_path: &str) -> Result<Connection> {
     let db = Connection::open_with_flags(db_path,
         OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE,
     )?;
@@ -105,7 +105,7 @@ pub fn init_db(db_path: &String) -> Result<Connection> {
     Ok(db)
 }
 
-pub fn process_directory(db: &Connection, dir: &String) -> Result<()> {
+pub fn process_directory(db: &Connection, dir: &str) -> Result<()> {
     for res in read_dir(dir)? {
         let entry = res?;
         let path = entry.path();
